@@ -13,7 +13,7 @@ with int_player_data as (
         player_id,
         player_name,
         team_tricode
-     from {{ ref('stg_cdnnba_data') }}
+     from {{ ref('int_cdnnba_data') }}
      where player_id != 0 and player_name is not null
 )
 

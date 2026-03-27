@@ -35,10 +35,6 @@ sources:
           - name: actionType
             data_type: STRING
             description: ''
-            tests:
-              - accepted_values:
-                  arguments: # available in v1.10.5 and higher. Older versions can set the <argument_name> as the top-level property.
-                    values: ['period','jumpball','3pt','block','rebound','2pt','turnover','steal','foul','freethrow','timeout','substitution','game','violation','ejection','heave','memo','instantreplay','stoppage']
           - name: subType
             data_type: STRING
             description: ''

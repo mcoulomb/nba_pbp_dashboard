@@ -12,7 +12,7 @@ with int_team_data as (
     select distinct
         team_id,
         team_tricode
-     from {{ ref('stg_cdnnba_data') }}
+     from {{ ref('int_cdnnba_data') }}
      where team_id != 0 and team_tricode is not null
 )
 

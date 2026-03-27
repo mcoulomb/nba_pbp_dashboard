@@ -2,5 +2,181 @@
 version: 2
 
 models:
-  - name: cdnnba
+  - name: stg_cdnnba_data
     description: "The staging table for cdnnba play by play data."
+    columns:
+          - name: action_number
+            data_type: INTEGER
+            description: ''
+          - name: clock
+            data_type: STRING
+            description: ''
+          - name: actual_time
+            data_type: TIMESTAMP
+            description: ''
+          - name: period
+            data_type: INTEGER
+            description: ''
+          - name: period_type
+            data_type: STRING
+            description: ''
+          - name: action_type
+            data_type: STRING
+            description: ''
+            tests:
+              - accepted_values:
+                  arguments: # available in v1.10.5 and higher. Older versions can set the <argument_name> as the top-level property.
+                    values: ['period','jumpball','3pt','block','rebound','2pt','turnover','steal','foul','freethrow','timeout','substitution','game','violation','ejection','heave','memo','instantreplay','stoppage']
+          - name: sub_type
+            data_type: STRING
+            description: ''
+          - name: qualifiers
+            data_type: STRING
+            description: ''
+          - name: player_id
+            data_type: INTEGER
+            description: ''
+          - name: x_loc
+            data_type: FLOAT
+            description: ''
+          - name: y_loc
+            data_type: FLOAT
+            description: ''
+          - name: possession
+            data_type: INTEGER
+            description: ''
+          - name: home_score
+            data_type: INTEGER
+            description: ''
+          - name: away_score
+            data_type: INTEGER
+            description: ''
+          - name: edited
+            data_type: TIMESTAMP
+            description: ''
+          - name: order_number
+            data_type: INTEGER
+            description: ''
+          - name: is_target_score_last_period
+            data_type: BOOLEAN
+            description: ''
+          - name: x_legacy
+            data_type: INTEGER
+            description: ''
+          - name: y_legacy
+            data_type: INTEGER
+            description: ''
+          - name: is_field_goal
+            data_type: INTEGER
+            description: ''
+          - name: side
+            data_type: STRING
+            description: ''
+          - name: description
+            data_type: STRING
+            description: ''
+          - name: players_id_filter
+            data_type: STRING
+            description: ''
+          - name: team_id
+            data_type: INTEGER
+            description: ''
+          - name: team_tricode
+            data_type: STRING
+            description: ''
+          - name: descriptor
+            data_type: STRING
+            description: ''
+          - name: jumpball_recovered_player_name
+            data_type: STRING
+            description: ''
+          - name: jumpball_recovered_player_id
+            data_type: INTEGER
+            description: ''
+          - name: player_last_name
+            data_type: STRING
+            description: ''
+          - name: player_name
+            data_type: STRING
+            description: ''
+          - name: jumpball_won_player_name
+            data_type: STRING
+            description: ''
+          - name: jumpball_won_player_id
+            data_type: INTEGER
+            description: ''
+          - name: jumpball_lost_player_name
+            data_type: STRING
+            description: ''
+          - name: jumpball_lost_player_id
+            data_type: INTEGER
+            description: ''
+          - name: area
+            data_type: STRING
+            description: ''
+          - name: area_detail
+            data_type: STRING
+            description: ''
+          - name: shot_distance
+            data_type: FLOAT
+            description: ''
+          - name: shot_result
+            data_type: STRING
+            description: ''
+          - name: shot_action_number
+            data_type: INTEGER
+            description: ''
+          - name: rebound_total
+            data_type: INTEGER
+            description: ''
+          - name: rebound_defensive_total
+            data_type: INTEGER
+            description: ''
+          - name: rebound_offensive_total
+            data_type: INTEGER
+            description: ''
+          - name: points_total
+            data_type: INTEGER
+            description: ''
+          - name: assist_player_name_initial
+            data_type: STRING
+            description: ''
+          - name: assist_player_id
+            data_type: INTEGER
+            description: ''
+          - name: assist_total
+            data_type: INTEGER
+            description: ''
+          - name: official_id
+            data_type: INTEGER
+            description: ''
+          - name: foul_personal_total
+            data_type: INTEGER
+            description: ''
+          - name: foul_technical_total
+            data_type: INTEGER
+            description: ''
+          - name: foul_drawn_player_name
+            data_type: STRING
+            description: ''
+          - name: foul_drawn_player_id
+            data_type: INTEGER
+            description: ''
+          - name: turnover_total
+            data_type: INTEGER
+            description: ''
+          - name: steal_player_name
+            data_type: STRING
+            description: ''
+          - name: steal_player_id
+            data_type: INTEGER
+            description: ''
+          - name: block_player_name
+            data_type: STRING
+            description: ''
+          - name: block_player_id
+            data_type: INTEGER
+            description: ''
+          - name: game_id
+            data_type: INTEGER
+            description: ''
