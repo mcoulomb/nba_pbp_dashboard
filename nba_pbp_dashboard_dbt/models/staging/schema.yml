@@ -1,0 +1,6 @@
+
+version: 2
+
+models:
+  - name: cdnnba
+    description: "The staging table for cdnnba play by play data."

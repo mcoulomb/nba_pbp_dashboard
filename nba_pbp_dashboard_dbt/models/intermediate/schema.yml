@@ -1,0 +1,8 @@
+
+version: 2
+
+models:
+  - name: players
+    description: "The intermediate table for player data."
+  - name: teams
+    description: "The intermediate table for team data."
