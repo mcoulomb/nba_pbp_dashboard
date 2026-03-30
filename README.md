@@ -2,8 +2,13 @@
 
 A comprehensive data pipeline and interactive dashboard for analyzing NBA play-by-play data. This project combines Apache Airflow for orchestration, dbt for data transformation, and Streamlit for visualization.
 
+## Problem Description:
+NBA Play by Play data can be quite inaccessible, or requires loading datasets into dataframes and manipulating the data directly. This project seeks to do the following:
+  1. Create an easy to use pipeline for loading nba play by play data into a data warehouse.
+  2. Transform the data to get insights into shot distribution per team over the years.
+  3. Transform the data to compare playmaking on the highest value shots across the different quarters of the game.
+     
 <img width="2485" height="1232" alt="image" src="https://github.com/user-attachments/assets/37d6611c-9a9e-4dac-982f-4928a1bedcae" />
-
 
 **Key Features:**
 - 🏀 Interactive Streamlit dashboard for exploring NBA play-by-play data (2020-2025 seasons)
