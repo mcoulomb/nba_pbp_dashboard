@@ -4,8 +4,6 @@ sources:
     database: |
       {%- if target.type == 'bigquery' -%}
         {{ env_var('GCP_PROJECT_ID', 'nba-pbp-dashboard') }}
-      {%- else -%}
-        taxi_rides_ny
       {%- endif -%}
     schema: |
       {%- if target.type == 'bigquery' -%}
