@@ -7,13 +7,12 @@ from streamlit_dynamic_filters import DynamicFilters
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
-# add page title
 st.set_page_config(
     page_title="NBA Play-by-Play Dashboard",  # the page title shown in the browser tab
     page_icon=":bar_chart:",  # the page favicon shown in the browser tab
     layout="wide",  # page layout : use the entire screen
 )
-# add page title
+
 st.title("NBA Play-by-Play Dashboard :bar_chart::basketball:")
 
 # about dataset section
