@@ -45,11 +45,9 @@ NBA Play by Play data can be quite inaccessible, or requires loading datasets in
 - **Docker & Docker Compose** — [Install Docker Desktop](https://www.docker.com/products/docker-desktop)
 - **Git** — For cloning the repository
 - **GCP Project** — With BigQuery and Cloud Storage APIs enabled
-
-### Optional (for advanced features)
 - **Terraform** — For infrastructure management
 - **dbt CLI** — For running dbt models manually
-- **Jupyter Notebook** — Already included in dependencies (in `pyproject.toml`)
+- **Airflow** — For running Dags to extract and load data to GCP.
 
 ### Python Version Check
 ```bash
