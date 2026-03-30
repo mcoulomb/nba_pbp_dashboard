@@ -2,7 +2,5 @@
 version: 2
 
 models:
-  - name: players
-    description: "The intermediate table for player data."
-  - name: teams
-    description: "The intermediate table for team data."
+  - name: cdnnba_data
+    description: "The intermediate table for cleaned and transformed NBA play-by-play data."

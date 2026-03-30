@@ -17,6 +17,6 @@ FROM (
         AND shot_result = 'Made' 
         AND assist_player_id IS NOT NULL 
     GROUP BY period, play_result, assist_player_id ) as assist_data
-LEFT OUTER JOIN {{ ref('int_player_data') }} as player_data 
+LEFT OUTER JOIN {{ ref('dim_player_data') }} as player_data 
 ON assist_data.assist_player_id = player_data.player_id 
 ORDER BY play_quantity DESC

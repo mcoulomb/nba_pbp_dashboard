@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: players
+    description: "The dimension table for player data."
+  - name: teams
+    description: "The dimension table for team data."
