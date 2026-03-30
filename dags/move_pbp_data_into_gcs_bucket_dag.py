@@ -34,9 +34,9 @@ dag = DAG(
     dag_id='move_pbp_data_into_gcs_bucket',
     default_args=default_args,
     description='Retrieves pbp dataset from https://github.com/shufinskiy/nba_data and loads it into a GCS bucket',
-    schedule='@daily',
+    schedule='@weekly',
     catchup=False,
-    tags=['example', 'hello-world'],
+    tags=['gcs', 'bucket'],
     params={
         "year": "2025",
         "dataset": "cdnnba"
