@@ -15,7 +15,7 @@ with source_data as (
 renamed as (
     select
         -- identifiers
-        cast(gameId as integer) as game_id,
+        cast(gameId as string) as game_id,
         cast(actionNumber as integer) as action_number,
         cast(personId as integer) as player_id,
         cast(teamId as integer) as team_id,
@@ -38,7 +38,6 @@ renamed as (
         cast(scoreHome as integer) as home_score,
         cast(scoreAway as integer) as away_score,
 
-
         -- actions
         cast(actionType as string) as action_type,
         cast(subType as string) as action_sub_type,
@@ -49,6 +48,7 @@ renamed as (
         cast(shotResult as string) as shot_result,
         cast(description as string) as description,
         cast(descriptor as string) as descriptor,
+        cast(isFieldGoal as boolean) as is_field_goal,
 
         --misc
         cast(x as numeric) as x_loc,
@@ -59,7 +59,6 @@ renamed as (
         cast(isTargetScoreLastPeriod as boolean) as is_target_score_last_period,
         cast(xLegacy as numeric) as x_legacy,
         cast(yLegacy as numeric) as y_legacy,
-        cast(isFieldGoal as integer) as is_field_goal,
         cast(side as string) as side,
         cast(jumpBallRecoveredName as string) as jumpball_recovered_name,
         cast(playerName as string) as player_last_name,

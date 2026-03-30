@@ -13,6 +13,11 @@ with int_cdnnba_data as (
         select
         -- identifiers
         game_id,
+        substr(game_id,2,2) as year,
+        CASE
+            WHEN (substr(game_id,1,1) = '2') THEN 'R'
+            ELSE 'P'
+        END as game_type,
         action_number,
         player_id,
         team_id,
@@ -44,7 +49,9 @@ with int_cdnnba_data as (
         shot_distance,
         shot_result,
         description,
-        descriptor
+        descriptor,
+        is_field_goal
+
     from {{ ref('stg_cdnnba_data') }}
 )
 
