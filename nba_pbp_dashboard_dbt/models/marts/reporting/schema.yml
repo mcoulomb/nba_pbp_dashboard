@@ -1,0 +1,5 @@
+models:
+  - name: fct_shot_diet_by_team_by_year
+    description: Distribution of shot type (3pt vs 2pt) broken out by NBA team and year.
+  - name: fct_top_playmakers
+    description: Distribution of shot type players assisted on (3pt vs Dunk) broken out by quarter over 5 years of data.

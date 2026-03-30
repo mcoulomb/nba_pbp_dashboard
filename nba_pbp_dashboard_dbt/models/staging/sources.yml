@@ -1,0 +1,195 @@
+sources:
+  - name: raw
+    description: Raw nba pbp data from https://github.com/shufinskiy/nba_data
+    database: |
+      {%- if target.type == 'bigquery' -%}
+        {{ env_var('GCP_PROJECT_ID', 'nba-pbp-dashboard') }}
+      {%- else -%}
+        taxi_rides_ny
+      {%- endif -%}
+    schema: |
+      {%- if target.type == 'bigquery' -%}
+        nba_pbp_data_raw
+      {%- else -%}
+        prod
+      {%- endif -%}
+    tables:
+      - name: nba_pbp_data_external
+        description: Raw nba_dashboard_records
+        columns:
+          - name: actionNumber
+            data_type: INTEGER
+            description: ''
+          - name: clock
+            data_type: STRING
+            description: ''
+          - name: timeActual
+            data_type: TIMESTAMP
+            description: ''
+          - name: period
+            data_type: INTEGER
+            description: ''
+          - name: periodType
+            data_type: STRING
+            description: ''
+          - name: actionType
+            data_type: STRING
+            description: ''
+          - name: subType
+            data_type: STRING
+            description: ''
+          - name: qualifiers
+            data_type: STRING
+            description: ''
+          - name: personId
+            data_type: INTEGER
+            description: ''
+          - name: x
+            data_type: FLOAT
+            description: ''
+          - name: 'y'
+            data_type: FLOAT
+            description: ''
+          - name: possession
+            data_type: INTEGER
+            description: ''
+          - name: scoreHome
+            data_type: INTEGER
+            description: ''
+          - name: scoreAway
+            data_type: INTEGER
+            description: ''
+          - name: edited
+            data_type: TIMESTAMP
+            description: ''
+          - name: orderNumber
+            data_type: INTEGER
+            description: ''
+          - name: isTargetScoreLastPeriod
+            data_type: BOOLEAN
+            description: ''
+          - name: xLegacy
+            data_type: INTEGER
+            description: ''
+          - name: yLegacy
+            data_type: INTEGER
+            description: ''
+          - name: isFieldGoal
+            data_type: INTEGER
+            description: ''
+          - name: side
+            data_type: STRING
+            description: ''
+          - name: description
+            data_type: STRING
+            description: ''
+          - name: personIdsFilter
+            data_type: STRING
+            description: ''
+          - name: teamId
+            data_type: INTEGER
+            description: ''
+          - name: teamTricode
+            data_type: STRING
+            description: ''
+          - name: descriptor
+            data_type: STRING
+            description: ''
+          - name: jumpBallRecoveredName
+            data_type: STRING
+            description: ''
+          - name: jumpBallRecoverdPersonId
+            data_type: INTEGER
+            description: ''
+          - name: playerName
+            data_type: STRING
+            description: ''
+          - name: playerNameI
+            data_type: STRING
+            description: ''
+          - name: jumpBallWonPlayerName
+            data_type: STRING
+            description: ''
+          - name: jumpBallWonPersonId
+            data_type: INTEGER
+            description: ''
+          - name: jumpBallLostPlayerName
+            data_type: STRING
+            description: ''
+          - name: jumpBallLostPersonId
+            data_type: INTEGER
+            description: ''
+          - name: area
+            data_type: STRING
+            description: ''
+          - name: areaDetail
+            data_type: STRING
+            description: ''
+          - name: shotDistance
+            data_type: FLOAT
+            description: ''
+          - name: shotResult
+            data_type: STRING
+            description: ''
+          - name: shotActionNumber
+            data_type: INTEGER
+            description: ''
+          - name: reboundTotal
+            data_type: INTEGER
+            description: ''
+          - name: reboundDefensiveTotal
+            data_type: INTEGER
+            description: ''
+          - name: reboundOffensiveTotal
+            data_type: INTEGER
+            description: ''
+          - name: pointsTotal
+            data_type: INTEGER
+            description: ''
+          - name: assistPlayerNameInitial
+            data_type: STRING
+            description: ''
+          - name: assistPersonId
+            data_type: INTEGER
+            description: ''
+          - name: assistTotal
+            data_type: INTEGER
+            description: ''
+          - name: officialId
+            data_type: INTEGER
+            description: ''
+          - name: foulPersonalTotal
+            data_type: INTEGER
+            description: ''
+          - name: foulTechnicalTotal
+            data_type: INTEGER
+            description: ''
+          - name: foulDrawnPlayerName
+            data_type: STRING
+            description: ''
+          - name: foulDrawnPersonId
+            data_type: INTEGER
+            description: ''
+          - name: turnoverTotal
+            data_type: INTEGER
+            description: ''
+          - name: stealPlayerName
+            data_type: STRING
+            description: ''
+          - name: stealPersonId
+            data_type: INTEGER
+            description: ''
+          - name: blockPlayerName
+            data_type: STRING
+            description: ''
+          - name: blockPersonId
+            data_type: INTEGER
+            description: ''
+          - name: gameId
+            data_type: INTEGER
+            description: ''
+
+    config:
+      freshness:
+        warn_after: {count: 24, period: hour}
+        error_after: {count: 48, period: hour}

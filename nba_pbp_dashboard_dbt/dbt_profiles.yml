@@ -1,0 +1,13 @@
+bigquery_connection:
+  target: dev
+  
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: nba-pbp-dashboard
+      dataset: nba_pbp_dashboard_raw
+      threads: 1
+      timeout_seconds: 300
+      location: us-central1
+      keyfile: /home/matt/keys/nba-pbp-dashboard-dbt.json
