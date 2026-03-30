@@ -5,7 +5,7 @@
 
 {{ config(
     materialized='table',
-    cluster_by = ["team_id", "player_id", "period", "action_type"]
+    cluster_by = ["year", "is_field_goal"]
     )
 }}
 
