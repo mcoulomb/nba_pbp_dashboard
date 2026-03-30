@@ -11,11 +11,11 @@ NBA Play by Play data can be quite inaccessible, or requires loading datasets in
 <img width="2485" height="1232" alt="image" src="https://github.com/user-attachments/assets/37d6611c-9a9e-4dac-982f-4928a1bedcae" />
 
 **Key Features:**
-- 🏀 Interactive Streamlit dashboard for exploring NBA play-by-play data (2020-2025 seasons)
-- 🔄 Apache Airflow DAGs for automated data ingestion and processing
-- 🏗️ dbt-powered data transformations in Google BigQuery
-- 🌩️ Google Cloud Storage and BigQuery for scalable data warehousing
 - 🎯 Infrastructure-as-Code with Terraform for reproducible deployments
+- 🔄 Apache Airflow DAGs for automated data ingestion and processing
+- 🌩️ Google Cloud Storage and BigQuery for scalable data warehousing
+- 🏗️ dbt-powered data transformations in Google BigQuery: Datawarehouse tables are ** clustered ** on year and is_field_goal columns to support downstream reporting.
+- 🏀 Interactive Streamlit dashboard for exploring NBA play-by-play data (2020-2025 seasons)
 
 ## Table of Contents
 
