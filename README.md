@@ -2,6 +2,9 @@
 
 A comprehensive data pipeline and interactive dashboard for analyzing NBA play-by-play data. This project combines Apache Airflow for orchestration, dbt for data transformation, and Streamlit for visualization.
 
+<img width="2485" height="1232" alt="image" src="https://github.com/user-attachments/assets/37d6611c-9a9e-4dac-982f-4928a1bedcae" />
+
+
 **Key Features:**
 - 🏀 Interactive Streamlit dashboard for exploring NBA play-by-play data (2020-2025 seasons)
 - 🔄 Apache Airflow DAGs for automated data ingestion and processing
