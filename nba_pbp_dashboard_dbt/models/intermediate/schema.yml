@@ -4,3 +4,125 @@ version: 2
 models:
   - name: cdnnba_data
     description: "The intermediate table for cleaned and transformed NBA play-by-play data."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - game_id
+            - action_number
+    columns:
+      - name: game_id
+        data_type: INTEGER
+        description: 'Unique identifier for the game.'
+      - name: year
+        data_type: STRING
+        description: 'Two-digit year extracted from game_id.'
+      - name: game_type
+        data_type: STRING
+        description: 'Game type indicator (R for regular season, P for playoffs).'
+      - name: action_number
+        data_type: INTEGER
+        description: 'Sequential action index within the game_id.'
+      - name: player_id
+        data_type: INTEGER
+        description: 'Player ID associated with this event, if applicable.'
+      - name: team_id
+        data_type: INTEGER
+        description: 'Team ID related to the event.'
+      - name: team_tricode
+        data_type: STRING
+        description: 'Three-letter team code (e.g., LAL, BOS).'
+      - name: player_name
+        data_type: STRING
+        description: 'Player name for the event, if available.'
+      - name: jumpball_recovered_player_id
+        data_type: INTEGER
+        description: 'Player ID recovering the jump ball.'
+      - name: jumpball_lost_player_id
+        data_type: INTEGER
+        description: 'Player ID losing the jump ball.'
+      - name: jumpball_won_player_id
+        data_type: INTEGER
+        description: 'Player ID winning the jump ball.'
+      - name: assist_player_id
+        data_type: INTEGER
+        description: 'Player ID credited with the assist.'
+      - name: foul_drawn_player_id
+        data_type: INTEGER
+        description: 'Player ID who drew the foul.'
+      - name: steal_player_id
+        data_type: INTEGER
+        description: 'Player ID credited with steal.'
+      - name: block_player_id
+        data_type: INTEGER
+        description: 'Player ID credited with block.'
+      - name: players_id_filter
+        data_type: STRING
+        description: 'Filter value for relevant person IDs associated with event.'
+      - name: period
+        data_type: INTEGER
+        description: 'Game period number (1-4 regular, 5+ overtime).'
+      - name: periodType
+        data_type: STRING
+        description: 'Type of period (e.g., REGULAR, OVERTIME).'
+      - name: clock
+        data_type: STRING
+        description: 'Time remaining in current period as MM:SS.'
+      - name: actual_time
+        data_type: TIMESTAMP
+        description: 'Actual timestamp when event occurred in game clock time zone.'
+      - name: home_score
+        data_type: INTEGER
+        description: 'Home team score after the event.'
+      - name: away_score
+        data_type: INTEGER
+        description: 'Away team score after the event.'
+      - name: action_type
+        data_type: STRING
+        description: 'High-level action category (e.g., 3pt, rebound, foul).'
+      - name: action_sub_type
+        data_type: STRING
+        description: 'Detailed subtype for the action (e.g., MAKE, MISS).'
+      - name: action_qualifiers
+        data_type: STRING
+        description: 'Comma-separated qualifiers describing additional event attributes.'
+      - name: area
+        data_type: STRING
+        description: 'Court area where shot or action originated.'
+      - name: area_detail
+        data_type: STRING
+        description: 'Detailed court sub-area for the action.'
+      - name: shot_distance
+        data_type: FLOAT
+        description: 'Distance (feet/meters) of shot attempt from basket.'
+      - name: shot_result
+        data_type: STRING
+        description: 'Result of shot attempt (e.g., MADE, MISSED).'
+      - name: x_location
+        data_type: FLOAT
+        description: 'X coordinate on the court for the event.'
+      - name: y_location
+        data_type: FLOAT
+        description: 'Y coordinate on the court for the event.'
+      - name: description
+        data_type: STRING
+        description: 'Textual description of the play-by-play event.'
+      - name: descriptor
+        data_type: STRING
+        description: 'Event descriptor used for game analysis categories.'
+      - name: is_field_goal
+        data_type: INTEGER
+        description: '1 if the action is a field goal attempt/goal, 0 otherwise.'
+      - name: minutes_remaining
+        data_type: INTEGER
+        description: 'Number of minutes remaining in the period.'
+      - name: seconds_remaining
+        data_type: FLOAT
+        description: 'Number of seconds remaining in the current minute of the current period. ss.00'
+      - name: is_garbage_time
+        data_type: BOOLEAN
+        description: >
+          True when the action occured during garbage time, false otherwise. Garbage time is defined as the following:
+              The score_diff >= 25 points from 12-9 minutes of the 4th quarter.
+              The score_diff >= 20 points from 9-6 minutes of the 4th quarter.
+              The score_diff >= 15 points from 6-1 minutes of 4th quarter / OT.
+              The score_diff >= 9 points in the last minute of 4th quarter / OT.

@@ -17,175 +17,175 @@ sources:
         columns:
           - name: actionNumber
             data_type: INTEGER
-            description: ''
+            description: 'Sequential action index within the raw play-by-play dataset.'
           - name: clock
             data_type: STRING
-            description: ''
+            description: 'Time remaining in current period as MM:SS.'
           - name: timeActual
             data_type: TIMESTAMP
-            description: ''
+            description: 'Actual timestamp when event occurred in game clock time zone.'
           - name: period
             data_type: INTEGER
-            description: ''
+            description: 'Game period number (1-4 regular, 5+ overtime).'
           - name: periodType
             data_type: STRING
-            description: ''
+            description: 'Type of period (e.g., regular, overtime).'
           - name: actionType
             data_type: STRING
-            description: ''
+            description: 'High-level action category (e.g., 3pt, rebound, foul).'
           - name: subType
             data_type: STRING
-            description: ''
+            description: 'Detailed subtype for the action (e.g., recovered, jump shot).'
           - name: qualifiers
             data_type: STRING
-            description: ''
+            description: 'Comma-separated qualifiers describing additional event attributes.'
           - name: personId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID associated with this event, if applicable.'
           - name: x
             data_type: FLOAT
-            description: ''
+            description: 'X coordinate on the court for the event.'
           - name: 'y'
             data_type: FLOAT
-            description: ''
+            description: 'Y coordinate on the court for the event.'
           - name: possession
             data_type: INTEGER
-            description: ''
+            description: 'Possession sequence number for the event.'
           - name: scoreHome
             data_type: INTEGER
-            description: ''
+            description: 'Home team score after the event.'
           - name: scoreAway
             data_type: INTEGER
-            description: ''
+            description: 'Away team score after the event.'
           - name: edited
             data_type: TIMESTAMP
-            description: ''
+            description: 'Timestamp when this event record was last updated.'
           - name: orderNumber
             data_type: INTEGER
-            description: ''
+            description: 'Chronological ordering value for events within game.'
           - name: isTargetScoreLastPeriod
             data_type: BOOLEAN
-            description: ''
+            description: 'True when the event reaches the final target score in last period.'
           - name: xLegacy
             data_type: INTEGER
-            description: ''
+            description: 'Legacy X coordinate from older data format.'
           - name: yLegacy
             data_type: INTEGER
-            description: ''
+            description: 'Legacy Y coordinate from older data format.'
           - name: isFieldGoal
             data_type: INTEGER
-            description: ''
+            description: '1 if the action is a field goal attempt/goal, 0 otherwise.'
           - name: side
             data_type: STRING
-            description: ''
+            description: 'Which side of the court the action took place on (e.g., left, right).'
           - name: description
             data_type: STRING
-            description: ''
+            description: 'Textual description of the play-by-play event.'
           - name: personIdsFilter
             data_type: STRING
-            description: ''
+            description: 'Filter value for relevant person IDs associated with event.'
           - name: teamId
             data_type: INTEGER
-            description: ''
+            description: 'Team ID related to the event.'
           - name: teamTricode
             data_type: STRING
-            description: ''
+            description: 'Three-letter team code (e.g., LAL, BOS).'
           - name: descriptor
             data_type: STRING
-            description: ''
+            description: 'Event descriptor used for game analysis categories.'
           - name: jumpBallRecoveredName
             data_type: STRING
-            description: ''
+            description: 'Player name recovering the jump ball when applicable.'
           - name: jumpBallRecoverdPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID recovering the jump ball.'
           - name: playerName
             data_type: STRING
-            description: ''
+            description: 'Player name for the event, if available.'
           - name: playerNameI
             data_type: STRING
-            description: ''
+            description: 'Initial-based player name for compact display.'
           - name: jumpBallWonPlayerName
             data_type: STRING
-            description: ''
+            description: 'Player name winning the jump ball.'
           - name: jumpBallWonPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID winning the jump ball.'
           - name: jumpBallLostPlayerName
             data_type: STRING
-            description: ''
+            description: 'Player name losing the jump ball.'
           - name: jumpBallLostPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID losing the jump ball.'
           - name: area
             data_type: STRING
-            description: ''
+            description: 'Court area where shot or action originated.'
           - name: areaDetail
             data_type: STRING
-            description: ''
+            description: 'Detailed court sub-area for the action.'
           - name: shotDistance
             data_type: FLOAT
-            description: ''
+            description: 'Distance (feet) of shot attempt from basket.'
           - name: shotResult
             data_type: STRING
-            description: ''
+            description: 'Result of shot attempt (e.g., MADE, MISSED).'
           - name: shotActionNumber
             data_type: INTEGER
-            description: ''
+            description: 'Action number specific to shot events.'
           - name: reboundTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running rebound total for the associated player.'
           - name: reboundDefensiveTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running defensive rebounds total for the associated player.'
           - name: reboundOffensiveTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running offensive rebounds total for the associated player.'
           - name: pointsTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running point total for the associated player.'
           - name: assistPlayerNameInitial
             data_type: STRING
-            description: ''
+            description: 'Assist passer name initial(s), if assist occurred.'
           - name: assistPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID credited with the assist.'
           - name: assistTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running assist total for the associated player.'
           - name: officialId
             data_type: INTEGER
-            description: ''
+            description: 'Game official/referee ID, if recorded.'
           - name: foulPersonalTotal
             data_type: INTEGER
-            description: ''
+            description: 'Cumulative personal fouls for player at event time.'
           - name: foulTechnicalTotal
             data_type: INTEGER
-            description: ''
+            description: 'Cumulative technical fouls for player at event time.'
           - name: foulDrawnPlayerName
             data_type: STRING
-            description: ''
+            description: 'Name of player who drew the foul.'
           - name: foulDrawnPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID who drew the foul.'
           - name: turnoverTotal
             data_type: INTEGER
-            description: ''
+            description: 'Running turnover count for the associated player.'
           - name: stealPlayerName
             data_type: STRING
-            description: ''
+            description: 'Player name credited with steal.'
           - name: stealPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID credited with steal.'
           - name: blockPlayerName
             data_type: STRING
-            description: ''
+            description: 'Player name credited with block.'
           - name: blockPersonId
             data_type: INTEGER
-            description: ''
+            description: 'Player ID credited with block.'
           - name: gameId
             data_type: INTEGER
-            description: ''
+            description: 'Unique identifier for the game.'
 
     config:
       freshness:
