@@ -12,7 +12,7 @@ FROM (
     FROM {{ ref('int_cdnnba_data') }}
     WHERE 
         is_field_goal = true
-        AND periodType='REGULAR'
+        AND period_type='REGULAR'
         AND (action_type='3pt' OR action_sub_type='DUNK')
         AND shot_result = 'Made' 
         AND assist_player_id IS NOT NULL 

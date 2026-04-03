@@ -32,7 +32,7 @@ renamed as (
 
         -- clock/period/score
         cast(period as integer) as period,
-        cast(lower(periodType) as string) as periodType,
+        cast(lower(periodType) as string) as period_type,
         cast(lower(clock) as string) as clock,
         cast(timeActual as timestamp) as actual_time,
         cast(scoreHome as integer) as home_score,

@@ -34,7 +34,7 @@ with int_cdnnba_data as (
 
         -- clock/period/score
         period,
-        periodType,
+        period_type,
         clock,
         CAST(substr(clock, 3, 2) as integer) as minutes_remaining,
         CAST(substr(clock, 6, 5) as numeric) as seconds_remaining,

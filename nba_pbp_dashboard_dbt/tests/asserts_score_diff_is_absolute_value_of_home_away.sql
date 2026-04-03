@@ -1,0 +1,2 @@
+-- The absolute value of home_score_diff and away_score_diff should always be equal to score_diff
+SELECT * FROM {{ ref("int_cdnnba_data") }} WHERE score_diff != abs(home_score_diff) OR score_diff != abs(away_score_diff)

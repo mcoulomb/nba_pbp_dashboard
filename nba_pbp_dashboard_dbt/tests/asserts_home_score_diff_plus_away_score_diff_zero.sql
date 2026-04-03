@@ -1,0 +1,2 @@
+-- Home and away score differences should always be equal and opposite, so the sum of the two differences should be zero
+SELECT * FROM {{ ref("int_cdnnba_data") }} WHERE home_score_diff + away_score_diff != 0
