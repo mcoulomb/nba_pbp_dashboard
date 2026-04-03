@@ -126,3 +126,4 @@ models:
               The score_diff >= 20 points from 9-6 minutes of the 4th quarter.
               The score_diff >= 15 points from 6-1 minutes of 4th quarter / OT.
               The score_diff >= 9 points in the last minute of 4th quarter / OT.
+  - name: home_away_team

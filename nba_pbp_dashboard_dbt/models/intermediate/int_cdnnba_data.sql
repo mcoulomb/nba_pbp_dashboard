@@ -40,7 +40,15 @@ with int_cdnnba_data as (
         CAST(substr(clock, 6, 5) as numeric) as seconds_remaining,
         home_score,
         away_score,
+        home_score - away_score as home_score_diff,
+        away_score - home_score as away_score_diff,
         abs(home_score - away_score) as score_diff,
+        CASE
+            WHEN shot_result = 'made' and action_type = 'freethrow' THEN 1
+            WHEN shot_result = 'made' and action_type = '2pt' THEN 2
+            WHEN shot_result = 'made' and action_type = '3pt' THEN 3
+        END as score_change,
+
 
         -- actions
         action_type,
@@ -59,19 +67,33 @@ with int_cdnnba_data as (
     from {{ ref('stg_cdnnba_data') }}
 ),
 
-int_pbp_data as (
+
+
+int_garbage_time_sweep_1_data as (
     select 
             CASE
-            WHEN (score_diff >= 25 AND period >= 4 AND minutes_remaining BETWEEN 9 and 12 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
-            WHEN (score_diff >= 20 AND period >= 4 AND minutes_remaining BETWEEN 6 and 9 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
-            WHEN (score_diff >= 15 AND period >= 4 AND minutes_remaining BETWEEN 1 and 6 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
-            WHEN (score_diff >= 9  AND period >= 4 AND minutes_remaining = 0 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
-            ELSE false
-            END as is_garbage_time,
+                WHEN (score_diff >= 25 AND period >= 4 AND minutes_remaining BETWEEN 9 and 12 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
+                WHEN (score_diff >= 20 AND period >= 4 AND minutes_remaining BETWEEN 6 and 9 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
+                WHEN (score_diff >= 15 AND period >= 4 AND minutes_remaining BETWEEN 1 and 6 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
+                WHEN (score_diff >= 9  AND period >= 4 AND minutes_remaining = 0 AND seconds_remaining BETWEEN 0 AND 59.99) THEN true
+                ELSE false
+            END as is_garbage_time_sweep_1,
             *
     from int_cdnnba_data
+),
+
+int_garbage_time_sweep_2_data as (
+    SELECT 
+        CASE
+            WHEN (SELECT count(*) FROM int_garbage_time_sweep_1_data as inner_query where inner_query.game_id = outer_query.game_id and inner_query.action_number >= outer_query.action_number and inner_query.is_garbage_time_sweep_1 = false) > 0
+            THEN false
+            ELSE is_garbage_time_sweep_1
+        END as is_garbage_time,
+        *
+    FROM int_garbage_time_sweep_1_data as outer_query
 )
 
-select * from int_pbp_data
+
+select * from int_garbage_time_sweep_2_data
 
 
