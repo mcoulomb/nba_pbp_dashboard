@@ -8,7 +8,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - game_id
-            - action_number
+            - order_number
     columns:
       - name: game_id
         data_type: INTEGER
@@ -126,4 +126,9 @@ models:
               The score_diff >= 20 points from 9-6 minutes of the 4th quarter.
               The score_diff >= 15 points from 6-1 minutes of 4th quarter / OT.
               The score_diff >= 9 points in the last minute of 4th quarter / OT.
+      - name: order_number
+        data_type: INTEGER
+        description: 'Chronological ordering value for events within game.'
+        tests:
+          - not_null
   - name: home_away_team

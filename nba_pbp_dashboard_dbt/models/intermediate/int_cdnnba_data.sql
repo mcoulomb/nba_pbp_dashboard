@@ -31,6 +31,7 @@ with int_cdnnba_data as (
         steal_player_id,
         block_player_id,
         players_id_filter,
+        order_number,
 
         -- clock/period/score
         period,
@@ -85,7 +86,7 @@ int_garbage_time_sweep_1_data as (
 int_garbage_time_sweep_2_data as (
     SELECT 
         CASE
-            WHEN (SELECT count(*) FROM int_garbage_time_sweep_1_data as inner_query where inner_query.game_id = outer_query.game_id and inner_query.action_number >= outer_query.action_number and inner_query.is_garbage_time_sweep_1 = false) > 0
+            WHEN (SELECT count(*) FROM int_garbage_time_sweep_1_data as inner_query where inner_query.game_id = outer_query.game_id and inner_query.order_number >= outer_query.order_number and inner_query.is_garbage_time_sweep_1 = false) > 0
             THEN false
             ELSE is_garbage_time_sweep_1
         END as is_garbage_time,

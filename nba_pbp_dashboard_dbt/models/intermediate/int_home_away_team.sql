@@ -10,7 +10,7 @@ with int_data as (
 
 int_home_away_determine_first_team as (
 select home_away_array[offset(0)] as temp_struct,game_id, year from (
-SELECT array_agg(struct(home_team_temp, away_team_temp, action_number)) as home_away_array, game_id, year from (
+SELECT array_agg(struct(home_team_temp, away_team_temp, order_number)) as home_away_array, game_id, year from (
 select    
                 CASE
                     WHEN score_diff = home_score_diff THEN team_tricode
@@ -22,9 +22,9 @@ select
                 END as away_team_temp,
             game_id,
             year,
-            action_number
+            order_number
     from int_data
-     where shot_result = 'made' and home_score_diff != away_score_diff order by game_id, action_number
+     where shot_result = 'made' and home_score_diff != away_score_diff order by game_id, order_number
 ) GROUP BY game_id, year
 )
 ),
