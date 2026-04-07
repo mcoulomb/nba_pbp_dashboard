@@ -12,6 +12,7 @@ with fct_turnover_data as (
         game_id,
         player_id,
         player_name,
+        year,
         action_number,
         order_number,
         team_tricode,
@@ -19,7 +20,7 @@ with fct_turnover_data as (
         away_team,
         team_in_lead,
         prev_team_in_lead,
-        lead_change,
+        is_lead_change,
         is_garbage_time,
         period,
         minutes_remaining,
@@ -36,8 +37,8 @@ with fct_turnover_data as (
         area_detail,
         shot_distance,
         shot_result,
-        x_location,
-        y_location,
+        x_location_converted,
+        y_location_converted,
         action_qualifiers
     from {{ ref("int_pbp_data") }} as pbp_data
     where

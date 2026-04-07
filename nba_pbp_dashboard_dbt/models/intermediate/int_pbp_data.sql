@@ -56,8 +56,11 @@ int_pbp_data1 as (
         area_detail,
         shot_distance,
         shot_result,
-        x_location,
-        y_location,
+        case
+            when x_location > 50 then (x_location * -1) + 100
+            else x_location
+        end as x_location_converted,
+        y_location / 2 as y_location_converted,
         description,
         descriptor,
         is_field_goal,
@@ -97,7 +100,7 @@ int_lead_change as (
    case
     when team_in_lead != prev_team_in_lead then true
     else false
-   end as lead_change
+   end as is_lead_change
    from int_finalize_team_lead
 )
 
