@@ -23,8 +23,8 @@ def time_based_shot_distribution_by_year(time_based_shot_distribution_df):
 def shot_chart(shot_chart_df_l, shot_chart_df_t):
 # Create hexbin mapbox using figure_factory
     fig, ax = plt.subplots(figsize=(12, 6))
-    hexbin_l = ax.hexbin(shot_chart_df_l["y_location_converted"], shot_chart_df_l["x_location_converted"],C=shot_chart_df_l["is_shot_made"], gridsize=20, cmap="Reds")
-    hexbin_t = ax.hexbin(shot_chart_df_t["y_location_converted"], shot_chart_df_t["x_location_converted"], gridsize=20,C=shot_chart_df_t["is_shot_made"], cmap="Reds", mincnt=50)
+    hexbin_l = ax.hexbin(shot_chart_df_l["y_location_converted"], shot_chart_df_l["x_location_converted"],C=shot_chart_df_l["is_shot_made"],reduce_C_function=reduce_hexbins, gridsize=20, cmap="Reds", mincnt=50)
+    hexbin_t = ax.hexbin(shot_chart_df_t["y_location_converted"], shot_chart_df_t["x_location_converted"], gridsize=20,C=shot_chart_df_t["is_shot_made"],reduce_C_function=reduce_hexbins, cmap="Reds", mincnt=50)
     ax.set_title('Boston Celtics 24-25 Season Shooting Chart')
 
     #if(len(hexbin_l.get_array()) > len(hexbin_t.get_array())):
@@ -74,7 +74,7 @@ def shot_chart(shot_chart_df_l, shot_chart_df_t):
     df_team.sort_values(by="coordinate",inplace=True)
     df_league.sort_values(by="coordinate",inplace=True)
 
-    df_merged = pd.merge_asof(df_team,df_league, on=['coordinate'],direction='nearest',tolerance=20)
+    df_merged = pd.merge_asof(df_team,df_league, on=['coordinate'],direction='nearest', tolerance=5)
 
     df_cleaned = df_merged.query("league_shooting_pct != 0 & league_shooting_pct != 1")
     df_cleaned = df_cleaned.query("team_shooting_pct != 0 & team_shooting_pct != 1")
@@ -84,8 +84,9 @@ def shot_chart(shot_chart_df_l, shot_chart_df_t):
     df_cleaned['y'] = (df_cleaned['coordinate'] / 10000)
     
 
-    hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_percentage_from_average'], gridsize=20, cmap="coolwarm")
+    hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_percentage_from_average'], gridsize=20, cmap="coolwarm", vmin=-.15,vmax=.15)
     plt.colorbar(hexbin_diff, label='Shooting Relative to League Average')
+
     plt.show()
 
     hexbin_l.remove()

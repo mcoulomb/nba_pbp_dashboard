@@ -83,9 +83,9 @@ with st.expander('NBA Player Shot Charts'):
     df_shot_charts2_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24'")
     df_shot_charts3_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24'")
 
-    df_shot_charts_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24' and team_tricode='cle'")
-    df_shot_charts2_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24' and team_tricode='cle'")
-    df_shot_charts3_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24' and team_tricode='cle'")
+    df_shot_charts_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24' and team_tricode='den'")
+    df_shot_charts2_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24' and team_tricode='den'")
+    df_shot_charts3_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24' and team_tricode='den'")
 
     df_merged_l = pd.concat([df_shot_charts_l,df_shot_charts2_l,df_shot_charts3_l])
     df_merged_t = pd.concat([df_shot_charts_t,df_shot_charts2_t,df_shot_charts3_t])
