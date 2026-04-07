@@ -79,15 +79,21 @@ with st.expander('Shot Distribution By Year'):
         #st.plotly_chart(vis.top_playmaker_by_period(top_playermakers_selection),height=300*count)
 
 with st.expander('NBA Player Shot Charts'):
-    df_shot_charts = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year = '24' and team_tricode = 'nyk' ")
-    df_shot_charts2 = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year = '24' and team_tricode = 'nyk' ")
-    df_shot_charts3 = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year = '24' and team_tricode = 'nyk' ")
+    df_shot_charts_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24'")
+    df_shot_charts2_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24'")
+    df_shot_charts3_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24'")
 
-    df_merged = pd.concat([df_shot_charts,df_shot_charts2,df_shot_charts3])
-    print(df_shot_charts)
+    df_shot_charts_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24' and team_tricode='cle'")
+    df_shot_charts2_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24' and team_tricode='cle'")
+    df_shot_charts3_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24' and team_tricode='cle'")
 
-    df_merged['is_shot_made'] = np.where(df_merged['shot_result'] == 'made', 1, 0)
-    #kernel = stats.gaussian_kde([df_shot_charts.is_shot_made])
-    #df_shot_charts['z'] = kernel([df_shot_charts.is_shot_made])
-    print(df_merged)
-    st.pyplot(vis.shot_chart(df_merged))
+    df_merged_l = pd.concat([df_shot_charts_l,df_shot_charts2_l,df_shot_charts3_l])
+    df_merged_t = pd.concat([df_shot_charts_t,df_shot_charts2_t,df_shot_charts3_t])
+
+
+    df_merged_l['is_shot_made'] = np.where(df_merged_l['shot_result'] == 'made', 1, 0)
+    df_merged_t['is_shot_made'] = np.where(df_merged_t['shot_result'] == 'made', 1, 0)
+
+
+    #st.dataframe(vis.shot_chart(df_merged_l,df_merged_t))
+    st.pyplot(vis.shot_chart(df_merged_l,df_merged_t))
