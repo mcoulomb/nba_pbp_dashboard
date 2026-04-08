@@ -79,21 +79,39 @@ with st.expander('Shot Distribution By Year'):
         #st.plotly_chart(vis.top_playmaker_by_period(top_playermakers_selection),height=300*count)
 
 with st.expander('NBA Player Shot Charts'):
-    df_shot_charts_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24'")
-    df_shot_charts2_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24'")
-    df_shot_charts3_l = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24'")
+    
+    year = st.selectbox(
+    "What year do you want to pull data for?",
+    ("20", "21", "22", "23", "24", "25"),
+    index=None,
+    placeholder="Select year to pull shot charts for...",
+    )
 
-    df_shot_charts_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year='24' and team_tricode='den'")
-    df_shot_charts2_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year='24' and team_tricode='den'")
-    df_shot_charts3_t = run_query("SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year='24' and team_tricode='den'")
+    if year != None:
+        df_shot_charts_l = run_query(f"SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_3pt_data` where year = '{year}'")
+        df_shot_charts2_l = run_query(f"SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_midrange_data` where year = '{year}'")
+        df_shot_charts3_l = run_query(f"SELECT * FROM `nba-pbp-dashboard.nba_pbp_dashboard_raw.fct_rim_shooting_data` where year = '{year}'")
 
-    df_merged_l = pd.concat([df_shot_charts_l,df_shot_charts2_l,df_shot_charts3_l])
-    df_merged_t = pd.concat([df_shot_charts_t,df_shot_charts2_t,df_shot_charts3_t])
+        df_merged_l = pd.concat([df_shot_charts_l,df_shot_charts2_l,df_shot_charts3_l])
+        dynamic_filters_shot_chart_team = DynamicFilters(df_merged_l, filters=['team_tricode'],filters_name='shot_chart_team')
+        dynamic_filters_shot_chart_team.display_filters()
+        df_team_selection = dynamic_filters_shot_chart_team.filter_df()
 
+        if st.session_state['shot_chart_team']['team_tricode'] != []:
+            df_merged_l['is_shot_made'] = np.where(df_merged_l['shot_result'] == 'made', 1, 0)
+            df_team_selection['is_shot_made'] = np.where(df_team_selection['shot_result'] == 'made', 1, 0)
+            df_merged_l['is_shot_attempt'] = 1 / len(df_merged_l)
+            df_team_selection['is_shot_attempt'] = 1 / len(df_team_selection)
+            dynamic_filters_shot_chart_player = DynamicFilters(df_team_selection, filters=['player_name'],filters_name='shot_chart_player')
+            dynamic_filters_shot_chart_player.display_filters()
+            st.pyplot(vis.shot_chart_percentage(df_merged_l,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
+            st.pyplot(vis.shot_chart_distribution(df_merged_l,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
 
-    df_merged_l['is_shot_made'] = np.where(df_merged_l['shot_result'] == 'made', 1, 0)
-    df_merged_t['is_shot_made'] = np.where(df_merged_t['shot_result'] == 'made', 1, 0)
+            df_player_selection = dynamic_filters_shot_chart_player.filter_df()
 
-
-    #st.dataframe(vis.shot_chart(df_merged_l,df_merged_t))
-    st.pyplot(vis.shot_chart(df_merged_l,df_merged_t))
+            if st.session_state['shot_chart_player']['player_name'] != []:
+                df_player_selection.drop(['is_shot_attempt'],axis=1, inplace=True)
+                df_player_selection['is_shot_attempt'] = 1 / len(df_player_selection)
+                st.pyplot(vis.shot_chart_percentage(df_merged_l,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
+                st.pyplot(vis.shot_chart_distribution(df_merged_l,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
+    
