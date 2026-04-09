@@ -9,6 +9,7 @@ dependencies = [
     "google>=3.0.0",
     "google-auth>=2.49.1",
     "google-cloud>=0.34.0",
+    "google-cloud-bigquery>=3.41.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.8",
     "notebook>=7.5.5",
