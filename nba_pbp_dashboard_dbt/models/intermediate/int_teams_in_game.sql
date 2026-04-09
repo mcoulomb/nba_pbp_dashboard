@@ -1,6 +1,5 @@
 {{ config(
-    materialized='view',
-    cluster_by = []
+    materialized='table'
     )
 }}
 

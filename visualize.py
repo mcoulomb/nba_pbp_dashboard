@@ -96,10 +96,11 @@ def shot_chart_percentage(shot_chart_df_league, shot_chart_df_team,year,team,pla
     else:
         gridsize=20
 
-    #Create the hexbin for the Shooting Percentage Relative to League Average and a colorbar to show what the scale is
-    hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_percentage_from_average'], gridsize=gridsize, cmap="coolwarm", vmin=-.15,vmax=.15)
-    plt.colorbar(hexbin_diff, label='Shooting Relative to League Average')
-    plt.show()
+    if(len(df_cleaned) != 0):
+        #Create the hexbin for the Shooting Percentage Relative to League Average and a colorbar to show what the scale is
+        hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_percentage_from_average'], gridsize=gridsize, cmap="coolwarm", vmin=-.15,vmax=.15)
+        plt.colorbar(hexbin_diff, label='Shooting Relative to League Average')
+        plt.show()
 
     #Remove the original 2 hexbin plots
     hexbin_l.remove()
@@ -181,10 +182,11 @@ def shot_chart_distribution(shot_chart_df_league, shot_chart_df_team,year,team,p
     else:
         gridsize=20
 
-    #Create the hexbin for the Shot Selection Relative to League Average and a colorbar to show what the scale is
-    hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_distribution_difference'], cmap="coolwarm",gridsize=gridsize, vmin=-.05,vmax=.05)
-    plt.colorbar(hexbin_diff, label='Shot Selection Relative to League Average')
-    plt.show()
+    if(len(df_cleaned) != 0):
+        #Create the hexbin for the Shot Selection Relative to League Average and a colorbar to show what the scale is
+        hexbin_diff = ax.hexbin(df_cleaned["y"], df_cleaned["x"],C=df_cleaned['shooting_distribution_difference'], cmap="coolwarm",gridsize=gridsize, vmin=-.05,vmax=.05)
+        plt.colorbar(hexbin_diff, label='Shot Selection Relative to League Average')
+        plt.show()
 
     #Remove the original 2 hexbin plots
     hexbin_l.remove()

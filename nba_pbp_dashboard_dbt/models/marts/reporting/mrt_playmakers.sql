@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table',
+    )
+}}
+
 SELECT 
     assist_data.*,
     player_data.player_name 

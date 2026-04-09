@@ -58,25 +58,22 @@ with st.expander('NBA Shot Charts'):
 
     if year != None:
         #We grab every shot attempt from all 3 locations on the floor for the entire year to establish the league data and then merge it into a single dataframe
-        df_shot_charts_l = run_query(f"SELECT * FROM `{TABLE_PREFIX}.fct_3pt_data` where year = {year}")
-        df_shot_charts2_l = run_query(f"SELECT * FROM `{TABLE_PREFIX}.fct_midrange_data` where year = {year}")
-        df_shot_charts3_l = run_query(f"SELECT * FROM `{TABLE_PREFIX}.fct_rim_shooting_data` where year = {year}")
+        df_league_shot_charts = run_query(f"SELECT * FROM `{TABLE_PREFIX}.mrt_shooting_data` where year = {year}")
 
-        df_merged_l = pd.concat([df_shot_charts_l,df_shot_charts2_l,df_shot_charts3_l])
 
         #Creating a dynamic filter on the team
-        dynamic_filters_shot_chart_team = DynamicFilters(df_merged_l, filters=['team_tricode'],filters_name='shot_chart_team')
+        dynamic_filters_shot_chart_team = DynamicFilters(df_league_shot_charts, filters=['team_tricode'],filters_name='shot_chart_team')
         dynamic_filters_shot_chart_team.display_filters()
         df_team_selection = dynamic_filters_shot_chart_team.filter_df()
 
         #If a team is selected we can generate the shot charts
         if st.session_state['shot_chart_team']['team_tricode'] != []:
             #Create an is_shot_made column and fill it with the results of the shot (made = 1, missed = 0)
-            df_merged_l['is_shot_made'] = np.where(df_merged_l['shot_result'] == 'made', 1, 0)
+            df_league_shot_charts['is_shot_made'] = np.where(df_league_shot_charts['shot_result'] == 'made', 1, 0)
             df_team_selection['is_shot_made'] = np.where(df_team_selection['shot_result'] == 'made', 1, 0)
 
             #Create an is_shot_attempt column that is 1/(total shot attempts) which is used for generating shot distribution hexbins
-            df_merged_l['is_shot_attempt'] = 1 / len(df_merged_l)
+            df_league_shot_charts['is_shot_attempt'] = 1 / len(df_league_shot_charts)
             df_team_selection['is_shot_attempt'] = 1 / len(df_team_selection)
 
             #Create a dynamic filter on the team dataframe to allow the selection of players
@@ -84,8 +81,8 @@ with st.expander('NBA Shot Charts'):
             dynamic_filters_shot_chart_player.display_filters()
 
             #Plot the heatmaps for shooting percentage and shot distribution relative to the league for the team
-            st.pyplot(vis.shot_chart_percentage(df_merged_l,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
-            st.pyplot(vis.shot_chart_distribution(df_merged_l,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
+            st.pyplot(vis.shot_chart_percentage(df_league_shot_charts,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
+            st.pyplot(vis.shot_chart_distribution(df_league_shot_charts,df_team_selection,year,st.session_state['shot_chart_team']['team_tricode'],'', False))
 
             df_player_selection = dynamic_filters_shot_chart_player.filter_df()
 
@@ -96,8 +93,8 @@ with st.expander('NBA Shot Charts'):
                 df_player_selection['is_shot_attempt'] = 1 / len(df_player_selection)
 
                 #Plot the heatmaps for shooting percentage and shot distribution relative to the league for the player
-                st.pyplot(vis.shot_chart_percentage(df_merged_l,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
-                st.pyplot(vis.shot_chart_distribution(df_merged_l,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
+                st.pyplot(vis.shot_chart_percentage(df_league_shot_charts,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
+                st.pyplot(vis.shot_chart_distribution(df_league_shot_charts,df_player_selection,year,st.session_state['shot_chart_team']['team_tricode'],st.session_state['shot_chart_player']['player_name'], True))
 
 #This section will generate a line graph showing how the distribution of shot type changes from the earlier parts of the game vs the end of game scenarios over the years    
 with st.expander('Lead Changing Shot Distribution in Last 3 minutes and OT vs Rest of Game'):
