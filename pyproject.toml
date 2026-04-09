@@ -5,8 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "cmap>=0.7.2",
+    "google>=3.0.0",
+    "google-auth>=2.49.1",
+    "google-cloud>=0.34.0",
     "jupyter>=1.1.1",
+    "matplotlib>=3.10.8",
     "notebook>=7.5.5",
     "plotly>=6.6.0",
     "streamlit>=1.55.0",
+    "streamlit-dynamic-filters>=0.1.9",
 ]
