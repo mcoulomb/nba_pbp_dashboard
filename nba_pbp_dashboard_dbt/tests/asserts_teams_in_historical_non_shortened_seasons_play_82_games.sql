@@ -9,4 +9,4 @@ GROUP BY year, team
 ORDER BY year, team
 )
 WHERE games_played != 82
-AND year != '{{ var('covid_year') }}' AND year != '{{ var('current_year') }}'
+AND year != {{ var('covid_year') }} AND year != {{ var('current_year') }}

@@ -13,7 +13,7 @@ with int_cdnnba_data as (
         select
         -- identifiers
         game_id,
-        substr(game_id,2,2) as year,
+        CAST(substr(game_id,2,2) as integer) as year,
         CASE
             WHEN (substr(game_id,1,1) = '2') THEN 'R'
             ELSE 'P'
