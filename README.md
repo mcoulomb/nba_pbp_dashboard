@@ -7,7 +7,9 @@ NBA Play by Play data can be quite inaccessible, or requires loading datasets in
   1. Create an easy to use pipeline for loading nba play by play data into a data warehouse.
   2. Transform the data to get insights into shot distribution per team over the years.
   3. Transform the data to compare playmaking on the highest value shots across the different quarters of the game.
+
      
+**Dashboard Link:** https://nbapbpdashboard-coulomb.streamlit.app/
 <img width="2485" height="1232" alt="image" src="https://github.com/user-attachments/assets/37d6611c-9a9e-4dac-982f-4928a1bedcae" />
 
 **Key Features:**
